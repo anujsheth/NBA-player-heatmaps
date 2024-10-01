@@ -113,6 +113,11 @@ for region in hex_data_sizes:
 for region in regions_dfs:
     plt.scatter(x = hex_data_points[region][:, 0], y = hex_data_points[region][:, 1], s = hex_data_sizes[region], color = cmaps_values[region], marker = 'h')
 
+plt.scatter(x = -110, y = 375, s = 100, color = cmap(0.5), marker = 'h')
+plt.scatter(x = -131.5, y = 375, s = 75, color = cmap(0.5), marker = 'h')
+plt.scatter(x = -152, y = 375, s = 50, color = cmap(0.5), marker = 'h')
+plt.scatter(x = -170, y = 375, s = 25, color = cmap(0.5), marker = 'h')
+
 plt.title(title)
 plt.axis('off')
 plt.xlim(-250, 250)
@@ -133,5 +138,7 @@ plt.text(1.05, 0.15, "~" + str(int(round(100 * max_per, 0))) + "%", fontsize = "
 plt.text(0.25, 1.5, "eFG%", fontsize = "small")
 
 plt.text(-3.75, 1.5, "Shot Quantity", fontsize = "small")
+plt.text(-4.15, -0.15, "Low", fontsize = "x-small")
+plt.text(-2.45, -0.15, "High", fontsize = "x-small")
 
 plt.show()
