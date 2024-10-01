@@ -89,26 +89,31 @@ multiplier = 100 / max_size
 for region in hex_data_sizes:
     hex_data_sizes[region] *= multiplier
 
-def custom_round(array):
+def custom_log_round(array):
 
     rounded_array = np.empty_like(array)
 
     for i, value in enumerate(array):
-        if value <= 4:
+        
+        if value == 0:
             rounded_array[i] = 0
-        elif value <= 10:
-            rounded_array[i] = 25
-        elif value <= 20:
-            rounded_array[i] = 50
-        elif value <= 30:
-            rounded_array[i] = 75
         else:
-            rounded_array[i] = 100
+            log_value = np.log(value) / np.log(2.5)
+            if log_value <= 1:
+                rounded_array[i] = 0
+            elif log_value <= 2:
+                rounded_array[i] = 25
+            elif log_value <= 3:
+                rounded_array[i] = 50
+            elif log_value <= 4:
+                rounded_array[i] = 75
+            else:
+                rounded_array[i] = 100
 
     return rounded_array
 
 for region in hex_data_sizes:
-    hex_data_sizes[region] = custom_round(hex_data_sizes[region])
+    hex_data_sizes[region] = custom_log_round(hex_data_sizes[region])
 
 for region in regions_dfs:
     plt.scatter(x = hex_data_points[region][:, 0], y = hex_data_points[region][:, 1], s = hex_data_sizes[region], color = cmaps_values[region], marker = 'h')
